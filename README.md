@@ -1,7 +1,7 @@
 # vue-localid
 Vue plugin to implement component scoped tag IDs.
 
-# Use of IDs in Vue components / templates
+# Use of IDs in Vue components
 Sometimes you want or need IDs in your Vue components.
 That might by OK if such a component is used only once
 within the browser DOM. However, If such a component is
@@ -23,9 +23,9 @@ next to the input tag. The only possible linkage is an
 ID. In this case you _need_ IDs, but this code **must never
 appear more than once** inside your DOM.
 
-This plugin adds a directive to automatically make IDs and
-"for"-attributes application-unique. It's implemented as
-a fire-and-forget solution to id-based code.
+This plugin adds a directive to automatically convert IDs and
+"for"-attributes into application-unique names.  
+It's implemented as a fire-and-forget solution to id-based code.
 
 # Installation
 ## NPM
@@ -72,20 +72,32 @@ This will be rendered as such:
 The applied number (here: 3) is the ```_uid``` member
 of the component instance.
 
-# Caveats
-There is no API to access generated IDs from scripts as this
-would be an anti-pattern within the Vue domain.
-The sole purpose is to enable id-based HTML constructs.
-Accessing elements from scripts should never be necessary when
-using Vue.  
-If you really need to identify elements you could use
-data-attributes, e.g.
-```html
-<input data-element="cb_enable_something" ... >
+# Script access
+You can generate compatible IDs from component scripts:
+```javascript
+// returns the same ID as from the template id/from attributes
+let myId = this.$localid.build("cb_enable_something");
 ```
 
-The same applies for CSS rules:  
-Classes, data-attributes and scoping are safe solutions.
+However, addressing the DOM directly, especially with IDs, might be
+considered a Vue anti-pattern.
+
+# Extended usage
+## Alternate naming
+If the name "localid" is in conflict with any other module or construct
+you can use your own name:
+```javascript
+import Vue from 'vue'
+import vuelocalid from 'vue-localid'
+
+Vue.use(vuelocalid, { name: 'compid' })
+```
+```html
+<label for=cb_enable_something" v-compid>
+```
+```javascript
+let myId = this.$compid.build("cb_enable_something");
+```
 
 # LICENSE
 MIT

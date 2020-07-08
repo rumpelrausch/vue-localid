@@ -13,17 +13,34 @@
  * <input type="checkbox" id="inp_1" v-localid>
  * <label for="inp_1">Feature</label>
  */
+
 export default {
-  install: function (Vue) {
-    Vue.directive('localid', {
+
+  install: function (Vue, options) {
+
+    options = options || {};
+    options = {
+      name: options.name || 'localid'
+    };
+
+    function buildId(uid, id) {
+      return 'id_' + uid + '_' + id;
+    }
+
+    Vue.directive(options.name, {
       bind: function (el, binding, vnode) {
-        const id = 'id_' + vnode.context._uid + '_';
+
+        Vue.prototype['$' + options.name] = {
+          build: (id) => buildId(vnode.context._uid, id)
+        };
+
         ['id', 'for'].forEach(tag => {
           if (el.hasAttribute(tag)) {
-            el.setAttribute(tag, id + el.getAttribute(tag));
+            el.setAttribute(tag, buildId(vnode.context._uid, el.getAttribute(tag)));
           }
         });
       }
-    })
+    });
+
   }
 }
