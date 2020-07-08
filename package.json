@@ -1,0 +1,26 @@
+{
+  "name": "vue-localid",
+  "version": "1.0.0",
+  "description": "Vue plugin to implement component scoped tag ids",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rumpelrausch/vue-localid.git"
+  },
+  "keywords": [
+    "vue",
+    "plugin",
+    "directive",
+    "id",
+    "attribute"
+  ],
+  "author": "rumpelrausch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rumpelrausch/vue-localid/issues"
+  },
+  "homepage": "https://github.com/rumpelrausch/vue-localid#readme"
+}
