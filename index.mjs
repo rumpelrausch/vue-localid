@@ -27,14 +27,28 @@ export default {
       return 'id_' + uid + '_' + id;
     }
 
+    Vue.mixin({
+      created: function () {
+        this['$' + options.name] = {
+          build: (id) => buildId(this._uid, id),
+          getId: () => this._uid
+        };
+      }
+    });
+
     Vue.directive(options.name, {
       bind: function (el, binding, vnode) {
-
-        Vue.prototype['$' + options.name] = {
-          build: (id) => buildId(vnode.context._uid, id)
-        };
-
-        ['id', 'for'].forEach(tag => {
+        [
+          'id',
+          'for',
+          'form',
+          'aria-activedescendant',
+          'aria-controls',
+          'aria-describedby',
+          'aria-flowto',
+          'aria-labelledby',
+          'aria-owns'
+        ].forEach(tag => {
           if (el.hasAttribute(tag)) {
             el.setAttribute(tag, buildId(vnode.context._uid, el.getAttribute(tag)));
           }

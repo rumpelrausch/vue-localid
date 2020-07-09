@@ -24,8 +24,21 @@ ID. In this case you _need_ IDs, but this code **must never
 appear more than once** inside your DOM.
 
 This plugin adds a directive to automatically convert IDs and
-"for"-attributes into application-unique names.  
-It's implemented as a fire-and-forget solution to id-based code.
+several attributes like "for" into application-unique names.  
+It's implemented as a fire-and-forget solution code:
+You can keep your id-based code and just add the directive
+```v-localid``` to the corresponding tags.
+
+Supported attributes:
+- id
+- for
+- form
+- aria-activedescendant
+- aria-controls
+- aria-describedby
+- aria-flowto
+- aria-labelledby
+- aria-owns
 
 # Installation
 ## NPM
@@ -34,17 +47,18 @@ npm install vue-localid
 ```
 
 # Usage
+Apply the plugin either globally (e.g. in your _main.js_ file)
+or from a component.
+
 ```javascript
 import Vue from 'vue'
-import vuelocalid from 'vue-localid'
-
-Vue.use(vuelocalid)
+import Localid from 'vue-localid'
+Vue.use(Localid)
 ```
 If you prefer a shorter form and don't bother about mixing
 module syntax, you can use:
 ```javascript
 import Vue from 'vue'
-
 Vue.use(require('vue-localid').default)
 ```
 
