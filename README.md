@@ -1,5 +1,5 @@
 # vue-localid
-Vue plugin to implement component scoped tag IDs.
+Vue plugin to implement component scoped element IDs.
 
 # Use of IDs in Vue components
 Sometimes you want or need IDs in your Vue components.
@@ -72,6 +72,7 @@ Apply the directive "localid" to tags containing "id" or
   </label>
 </form>
 ```
+Notice that the ```id``` and ```for``` attributes remain unchanged (it's copy & paste friendly).
 
 This will be rendered as such:
 ```html
